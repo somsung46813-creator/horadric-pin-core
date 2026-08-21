@@ -216,6 +216,11 @@
   --elem-water: oklch(0.68 0.13 220);
   --elem-air: oklch(0.85 0.07 100);
   --elem-earth: oklch(0.6 0.11 145);
+  --rarity-common: oklch(0.66 0.02 80);
+  --rarity-uncommon: oklch(0.7 0.1 150);
+  --rarity-rare: oklch(0.72 0.12 230);
+  --rarity-sacred: oklch(0.76 0.16 70);
+  --rarity-singular: oklch(0.7 0.21 20);
 }
 
 @theme inline {
@@ -224,6 +229,7 @@
   --color-elem-air: var(--elem-air);
   --color-elem-earth: var(--elem-earth);
 }
+
 
 @utility gem-facet {
   background: radial-gradient(
