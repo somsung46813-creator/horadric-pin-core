@@ -157,3 +157,56 @@
     color: var(--color-foreground);
   }
 }
+
+@theme inline {
+  --color-ember: var(--ember);
+  --font-display: "Cinzel", ui-serif, Georgia, serif;
+  --font-body: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-image: var(--gradient-ember);
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+}
+
+@utility panel-etched {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-etch);
+}
+
+@utility text-rune {
+  background-image: var(--gradient-rune);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glow-ember {
+  box-shadow: var(--shadow-ember);
+}
+
+@keyframes pulse-ember {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@utility animate-ember {
+  animation: pulse-ember 5s ease-in-out infinite;
+}
