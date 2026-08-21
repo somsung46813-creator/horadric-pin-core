@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import gemImage from "@/assets/horadric-gem.jpg";
 
 export const Route = createFileRoute("/")({
@@ -82,6 +82,12 @@ function Index() {
             Popping Interning NPU
           </p>
           <p className="mt-4 text-xs text-muted-foreground">by Jonathan R Mckinney</p>
+          <Link
+            to="/forge"
+            className="glow-ember mt-7 inline-flex rounded-md border border-primary/60 bg-primary px-6 py-3 font-display text-xs font-bold uppercase tracking-[0.25em] text-primary-foreground transition-transform hover:scale-[1.02]"
+          >
+            Enter the Gem Forge
+          </Link>
         </header>
 
         <section className="mt-14 flex flex-col items-center">
