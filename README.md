@@ -4,7 +4,7 @@ PIN(POPPING INTERNING NPU), by: Jonathan R Mckinney
 
 Presetted - Offsetted *Proceduring(&Preloaded/Offloaded/Parametering){
 
-Updating(Upgrades);
+Updates(Upgrades);
 
 SortPullFilterPoll(Caching/Memory Mapping);
 
