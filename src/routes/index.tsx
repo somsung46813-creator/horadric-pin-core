@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Preloaded, offloaded, parametering pipeline: updating, sort-pull-filter-poll caching, and a reader/writer packetizer handler.",
+          "Preloaded, offloaded, parametering pipeline: updates, sort-pull-filter-poll caching, and a reader/writer packetizer handler.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
 const stages = [
   {
     id: "01",
-    name: "Updating",
+    name: "Updates",
     sub: "Upgrades",
     lines: [
       "Version deltas resolved before dispatch",
