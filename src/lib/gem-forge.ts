@@ -154,14 +154,6 @@ const SHAPES = [
   "Rhombic (4-Point Focus)",
 ];
 
-const RARITIES = [
-  "Common Relic",
-  "Uncommon Relic",
-  "Rare Horadric Artifact",
-  "Sacred Horadric Artifact",
-  "Singular — No Second Exists",
-];
-
 const pick = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]!;
 const range = (min: number, max: number, dp: number) =>
   (Math.random() * (max - min) + min).toFixed(dp);
@@ -169,7 +161,8 @@ const range = (min: number, max: number, dp: number) =>
 export function forgeGem(): Gem {
   const element = pick(ELEMENTS);
   const t = TABLES[element];
-  const rarityIndex = Math.floor(Math.random() ** 2 * RARITIES.length);
+  const rarityIndex = Math.floor(Math.random() ** 2 * RARITY_TIERS.length);
+  const tier = RARITY_TIERS[rarityIndex]!;
 
   return {
     name: `${pick(t.prefixes)} ${pick(t.cores)}`,
