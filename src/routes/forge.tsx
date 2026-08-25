@@ -58,11 +58,9 @@ function ForgePage() {
         <section className="panel-etched mt-10 rounded-lg p-6 sm:p-9">
           {gem ? (
             <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10">
-              <div
-                className="animate-ember gem-facet size-40 shrink-0"
-                style={{ ["--gem-hue" as string]: gem.hue }}
-                aria-hidden="true"
-              />
+              <div className="animate-ember shrink-0">
+                <GemPrism hue={gem.hue} tier={gem.tier} size={168} labelled />
+              </div>
               <div className="min-w-0 flex-1 text-center sm:text-left">
                 <p
                   className="text-xs uppercase tracking-[0.3em]"
