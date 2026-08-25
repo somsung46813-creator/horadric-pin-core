@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { forgeGem, type Gem } from "@/lib/gem-forge";
+import { forgeGem, RARITY_TIERS, type Gem } from "@/lib/gem-forge";
+import { GemPrism } from "@/components/GemPrism";
 
 export const Route = createFileRoute("/forge")({
   head: () => ({
