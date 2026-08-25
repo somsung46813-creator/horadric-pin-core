@@ -221,3 +221,12 @@ function Row({ k, v }: { k: string; v: string }) {
     </div>
   );
 }
+
+function MapNote({ k, children }: { k: string; children: React.ReactNode }) {
+  return (
+    <div className="panel-etched rounded-lg p-4">
+      <dt className="text-[0.65rem] uppercase tracking-[0.2em] text-primary">{k}</dt>
+      <dd className="mt-1.5 text-sm text-muted-foreground">{children}</dd>
+    </div>
+  );
+}
