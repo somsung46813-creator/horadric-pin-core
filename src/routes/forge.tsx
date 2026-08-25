@@ -87,6 +87,14 @@ function ForgePage() {
                   <Row k="Weight" v={gem.weight} />
                   <Row k="Composition" v={gem.composition} />
                   <Row k="Properties" v={gem.properties} />
+                  <Row
+                    k="Facet Cut"
+                    v={`Table + ${gem.tier.steps} step cuts, ${gem.tier.indexLines}-index crosses`}
+                  />
+                  <Row
+                    k="Dispersion"
+                    v={`${Math.round(gem.tier.dispersion * 100)}% rainbow refraction`}
+                  />
                 </dl>
 
                 <div className="mt-5">
