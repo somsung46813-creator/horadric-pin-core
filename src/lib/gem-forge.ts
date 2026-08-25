@@ -1,5 +1,73 @@
 export type Element = "Fire" | "Water" | "Air" | "Earth";
 
+export type RarityKey =
+  | "common"
+  | "uncommon"
+  | "rare"
+  | "sacred"
+  | "singular";
+
+export type RarityTier = {
+  key: RarityKey;
+  label: string;
+  /** Concentric step cuts between table and girdle. */
+  steps: number;
+  /** 0-1 strength of the rainbow prism dispersion. */
+  dispersion: number;
+  /** Index lines cut across the crown. */
+  indexLines: number;
+  tierColor: string;
+  note: string;
+};
+
+export const RARITY_TIERS: RarityTier[] = [
+  {
+    key: "common",
+    label: "Common Relic",
+    steps: 2,
+    dispersion: 0.12,
+    indexLines: 4,
+    tierColor: "var(--rarity-common)",
+    note: "Shallow table, two step cuts. Light exits before it splits.",
+  },
+  {
+    key: "uncommon",
+    label: "Uncommon Relic",
+    steps: 3,
+    dispersion: 0.3,
+    indexLines: 4,
+    tierColor: "var(--rarity-uncommon)",
+    note: "Three concentric steps. Faint spectral fringe at the girdle.",
+  },
+  {
+    key: "rare",
+    label: "Rare Horadric Artifact",
+    steps: 4,
+    dispersion: 0.55,
+    indexLines: 8,
+    tierColor: "var(--rarity-rare)",
+    note: "Eight-index crosses. Rainbow bands resolve across the crown.",
+  },
+  {
+    key: "sacred",
+    label: "Sacred Horadric Artifact",
+    steps: 5,
+    dispersion: 0.78,
+    indexLines: 8,
+    tierColor: "var(--rarity-sacred)",
+    note: "Deep pyramid slope. Full-spectrum dispersion through every step.",
+  },
+  {
+    key: "singular",
+    label: "Singular — No Second Exists",
+    steps: 6,
+    dispersion: 1,
+    indexLines: 16,
+    tierColor: "var(--rarity-singular)",
+    note: "Sixteen index grooves. The prism holds an unbroken rainbow.",
+  },
+];
+
 export type Gem = {
   name: string;
   element: Element;
@@ -12,6 +80,7 @@ export type Gem = {
   composition: string;
   properties: string;
   rarity: string;
+  tier: RarityTier;
   resonance: number;
 };
 
