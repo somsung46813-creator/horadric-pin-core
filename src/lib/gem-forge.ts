@@ -1,5 +1,73 @@
 export type Element = "Fire" | "Water" | "Air" | "Earth";
 
+export type RarityKey =
+  | "common"
+  | "uncommon"
+  | "rare"
+  | "sacred"
+  | "singular";
+
+export type RarityTier = {
+  key: RarityKey;
+  label: string;
+  /** Concentric step cuts between table and girdle. */
+  steps: number;
+  /** 0-1 strength of the rainbow prism dispersion. */
+  dispersion: number;
+  /** Index lines cut across the crown. */
+  indexLines: number;
+  tierColor: string;
+  note: string;
+};
+
+export const RARITY_TIERS: RarityTier[] = [
+  {
+    key: "common",
+    label: "Common Relic",
+    steps: 2,
+    dispersion: 0.12,
+    indexLines: 4,
+    tierColor: "var(--rarity-common)",
+    note: "Shallow table, two step cuts. Light exits before it splits.",
+  },
+  {
+    key: "uncommon",
+    label: "Uncommon Relic",
+    steps: 3,
+    dispersion: 0.3,
+    indexLines: 4,
+    tierColor: "var(--rarity-uncommon)",
+    note: "Three concentric steps. Faint spectral fringe at the girdle.",
+  },
+  {
+    key: "rare",
+    label: "Rare Horadric Artifact",
+    steps: 4,
+    dispersion: 0.55,
+    indexLines: 8,
+    tierColor: "var(--rarity-rare)",
+    note: "Eight-index crosses. Rainbow bands resolve across the crown.",
+  },
+  {
+    key: "sacred",
+    label: "Sacred Horadric Artifact",
+    steps: 5,
+    dispersion: 0.78,
+    indexLines: 8,
+    tierColor: "var(--rarity-sacred)",
+    note: "Deep pyramid slope. Full-spectrum dispersion through every step.",
+  },
+  {
+    key: "singular",
+    label: "Singular — No Second Exists",
+    steps: 6,
+    dispersion: 1,
+    indexLines: 16,
+    tierColor: "var(--rarity-singular)",
+    note: "Sixteen index grooves. The prism holds an unbroken rainbow.",
+  },
+];
+
 export type Gem = {
   name: string;
   element: Element;
@@ -12,6 +80,7 @@ export type Gem = {
   composition: string;
   properties: string;
   rarity: string;
+  tier: RarityTier;
   resonance: number;
 };
 
@@ -85,14 +154,6 @@ const SHAPES = [
   "Rhombic (4-Point Focus)",
 ];
 
-const RARITIES = [
-  "Common Relic",
-  "Uncommon Relic",
-  "Rare Horadric Artifact",
-  "Sacred Horadric Artifact",
-  "Singular — No Second Exists",
-];
-
 const pick = <T,>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]!;
 const range = (min: number, max: number, dp: number) =>
   (Math.random() * (max - min) + min).toFixed(dp);
@@ -100,7 +161,8 @@ const range = (min: number, max: number, dp: number) =>
 export function forgeGem(): Gem {
   const element = pick(ELEMENTS);
   const t = TABLES[element];
-  const rarityIndex = Math.floor(Math.random() ** 2 * RARITIES.length);
+  const rarityIndex = Math.floor(Math.random() ** 2 * RARITY_TIERS.length);
+  const tier = RARITY_TIERS[rarityIndex]!;
 
   return {
     name: `${pick(t.prefixes)} ${pick(t.cores)}`,
@@ -113,7 +175,8 @@ export function forgeGem(): Gem {
     weight: `~${range(9, 88, 1)} g`,
     composition: pick(t.compositions),
     properties: `${pick(t.properties)}. Reacts to the Horadric Staff.`,
-    rarity: RARITIES[rarityIndex]!,
+    rarity: tier.label,
+    tier,
     resonance: Math.floor(Math.random() * 100) + 1,
   };
 }

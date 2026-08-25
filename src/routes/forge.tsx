@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { forgeGem, type Gem } from "@/lib/gem-forge";
+import { forgeGem, RARITY_TIERS, type Gem } from "@/lib/gem-forge";
+import { GemPrism } from "@/components/GemPrism";
 
 export const Route = createFileRoute("/forge")({
   head: () => ({
@@ -57,11 +58,9 @@ function ForgePage() {
         <section className="panel-etched mt-10 rounded-lg p-6 sm:p-9">
           {gem ? (
             <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10">
-              <div
-                className="animate-ember gem-facet size-40 shrink-0"
-                style={{ ["--gem-hue" as string]: gem.hue }}
-                aria-hidden="true"
-              />
+              <div className="animate-ember shrink-0">
+                <GemPrism hue={gem.hue} tier={gem.tier} size={168} labelled />
+              </div>
               <div className="min-w-0 flex-1 text-center sm:text-left">
                 <p
                   className="text-xs uppercase tracking-[0.3em]"
@@ -72,9 +71,13 @@ function ForgePage() {
                 <h2 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
                   {gem.name}
                 </h2>
-                <p className="mt-2 text-xs uppercase tracking-widest text-accent">
+                <p
+                  className="mt-3 inline-block rounded-full border px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em]"
+                  style={{ color: gem.tier.tierColor, borderColor: gem.tier.tierColor }}
+                >
                   {gem.rarity}
                 </p>
+                <p className="mt-2 text-xs text-muted-foreground">{gem.tier.note}</p>
 
                 <dl className="mt-6 divide-y divide-border border-y border-border text-left">
                   <Row k="Type" v={gem.type} />
@@ -84,6 +87,14 @@ function ForgePage() {
                   <Row k="Weight" v={gem.weight} />
                   <Row k="Composition" v={gem.composition} />
                   <Row k="Properties" v={gem.properties} />
+                  <Row
+                    k="Facet Cut"
+                    v={`Table + ${gem.tier.steps} step cuts, ${gem.tier.indexLines}-index crosses`}
+                  />
+                  <Row
+                    k="Dispersion"
+                    v={`${Math.round(gem.tier.dispersion * 100)}% rainbow refraction`}
+                  />
                 </dl>
 
                 <div className="mt-5">
@@ -125,11 +136,7 @@ function ForgePage() {
                   key={`${g.name}-${i}`}
                   className="panel-etched flex items-center gap-3 rounded-lg p-3"
                 >
-                  <span
-                    className="gem-facet size-9 shrink-0"
-                    style={{ ["--gem-hue" as string]: g.hue }}
-                    aria-hidden="true"
-                  />
+                  <GemPrism hue={g.hue} tier={g.tier} size={38} className="shrink-0" />
                   <span className="min-w-0">
                     <span className="block truncate text-sm text-foreground">{g.name}</span>
                     <span
@@ -138,12 +145,67 @@ function ForgePage() {
                     >
                       {g.element} · {g.resonance}%
                     </span>
+                    <span
+                      className="block truncate text-[0.6rem] uppercase tracking-widest"
+                      style={{ color: g.tier.tierColor }}
+                    >
+                      {g.tier.label}
+                    </span>
                   </span>
                 </li>
               ))}
             </ul>
           </section>
         )}
+
+        <section className="mt-14">
+          <h2 className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
+            Rainbow Facet Cutting Map
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+            A master grid projecting multi-layered concentric squares onto a flat plane.
+            Cutting these angles turns clear crystal into a prism that refracts light into
+            rainbow colour. Each rarity tier adds another ring of step cuts and more index
+            grooves — deeper slope, stronger dispersion.
+          </p>
+
+          <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+            <MapNote k="Table (Center Square)">
+              The flat topmost facet — the window for entering light.
+            </MapNote>
+            <MapNote k="Steps (Concentric Borders)">
+              Flat step cuts descending at regular index increments to build the pyramid
+              slope.
+            </MapNote>
+            <MapNote k="Girdle (Outer Border)">
+              The base outline where the facets meet the raw material boundary.
+            </MapNote>
+            <MapNote k="Diagonals & Crosses">
+              Grooved index lines cutting across intersections for even light dispersion.
+            </MapNote>
+          </dl>
+
+          <ul className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {RARITY_TIERS.map((t) => (
+              <li
+                key={t.key}
+                className="panel-etched flex flex-col items-center gap-3 rounded-lg p-4 text-center"
+              >
+                <GemPrism hue="var(--elem-air)" tier={t} size={84} />
+                <span
+                  className="text-[0.62rem] uppercase tracking-[0.18em]"
+                  style={{ color: t.tierColor }}
+                >
+                  {t.label}
+                </span>
+                <span className="text-[0.65rem] text-muted-foreground">
+                  {t.steps} steps · {t.indexLines} index ·{" "}
+                  {Math.round(t.dispersion * 100)}% prism
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </main>
   );
@@ -156,6 +218,15 @@ function Row({ k, v }: { k: string; v: string }) {
         {k}
       </dt>
       <dd className="text-sm text-foreground">{v}</dd>
+    </div>
+  );
+}
+
+function MapNote({ k, children }: { k: string; children: React.ReactNode }) {
+  return (
+    <div className="panel-etched rounded-lg p-4">
+      <dt className="text-[0.65rem] uppercase tracking-[0.2em] text-primary">{k}</dt>
+      <dd className="mt-1.5 text-sm text-muted-foreground">{children}</dd>
     </div>
   );
 }
