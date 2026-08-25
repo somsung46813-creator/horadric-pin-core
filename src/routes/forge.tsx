@@ -71,9 +71,13 @@ function ForgePage() {
                 <h2 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
                   {gem.name}
                 </h2>
-                <p className="mt-2 text-xs uppercase tracking-widest text-accent">
+                <p
+                  className="mt-3 inline-block rounded-full border px-3 py-1 text-[0.65rem] uppercase tracking-[0.2em]"
+                  style={{ color: gem.tier.tierColor, borderColor: gem.tier.tierColor }}
+                >
                   {gem.rarity}
                 </p>
+                <p className="mt-2 text-xs text-muted-foreground">{gem.tier.note}</p>
 
                 <dl className="mt-6 divide-y divide-border border-y border-border text-left">
                   <Row k="Type" v={gem.type} />
