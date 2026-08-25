@@ -175,7 +175,8 @@ export function forgeGem(): Gem {
     weight: `~${range(9, 88, 1)} g`,
     composition: pick(t.compositions),
     properties: `${pick(t.properties)}. Reacts to the Horadric Staff.`,
-    rarity: RARITIES[rarityIndex]!,
+    rarity: tier.label,
+    tier,
     resonance: Math.floor(Math.random() * 100) + 1,
   };
 }
