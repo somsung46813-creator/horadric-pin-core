@@ -93,13 +93,7 @@ function Index() {
         <section className="mt-14 flex flex-col items-center">
           <div className="relative">
             <div className="absolute inset-0 animate-ember rounded-full glow-ember" />
-            <img
-              src={gemImage}
-              alt="Octagonal ancient topaz Horadric gemstone with a glowing ember core"
-              width={1024}
-              height={1024}
-              className="relative w-64 max-w-full sm:w-80"
-            />
+            <GemCanvas size={384} />
           </div>
           <p className="mt-8 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
             A crystalline manifestation of the ancient horadric mechanism that once bound
