@@ -173,6 +173,7 @@ export function GemCanvas({ size = 384 }: { size?: number }) {
       for (let i = 0; i < 2; i++) spawn();
       for (let i = sparks.length - 1; i >= 0; i--) {
         const s = sparks[i];
+        if (!s) continue;
         s.life++;
         s.x += s.vx + Math.sin((t + i) * 2) * 0.15;
         s.y += s.vy;
