@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import gemImage from "@/assets/horadric-gem.jpg";
+import { GemCanvas } from "@/components/GemCanvas";
 
 export const Route = createFileRoute("/")({
   head: () => ({
